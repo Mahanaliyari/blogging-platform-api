@@ -64,7 +64,7 @@ class token_data(BaseModel):
   
 # Validating the token created and given to the user  
 class Token(BaseModel): 
-    token : str
+    access_token : str
     token_type : str
     
 

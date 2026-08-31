@@ -8,7 +8,7 @@ router =  APIRouter(
     tags= ["Auth"]
 )
 
-@router.post("/login", status_code= status.HTTP_201_CREATED, response_model = schemas.Token)
+@router.post("/login", status_code= status.HTTP_200_OK, response_model = schemas.Token)
 def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
     user = db.query(models.User).filter(user_credentials.username == models.User.email).first() # type: ignore
     
@@ -24,4 +24,5 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session =
     # We decided to put user_id into payload
     token = oauth2.create_token({"user_id": user.id})
     
-    return {"token": token, "token_type": "bearer"}  
+    return {"access_token": token, 
+            "token_type": "bearer"}  
