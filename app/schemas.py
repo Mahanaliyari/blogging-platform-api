@@ -58,7 +58,7 @@ class LoginCreate(BaseModel):
     
 
 class token_data(BaseModel): 
-    # This means "this field's value    must either be a str, or it can be None."
+    # This means "this field's value must either be a str, or it can be None."
     id : Optional[str] = None
     
   
@@ -70,10 +70,10 @@ class Token(BaseModel):
 
 class LikePost(BaseModel): 
     post_id : int
-    liked : int
+    #Literal[0, 1] tells Pydantic: this field must be precisely 0 or precisely 1.
+    liked : Literal[0,1]
     
     
 class GetLikes(BaseModel): 
     Post: PostResponse
-    #Literal[0, 1] tells Pydantic: this field must be precisely 0 or precisely 1.
-    like: Literal[0,1]
+    like: int

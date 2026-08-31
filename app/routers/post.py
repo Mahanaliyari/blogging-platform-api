@@ -70,7 +70,6 @@ def get_posts(db : Session = Depends(get_db), current_user = Depends(oauth2.get_
    
 # Getting a single post from the database 
 @router.get("/{id}", response_model = schemas.GetLikes)
-# convertt the id into int
 def get_post(id: int, db : Session = Depends(get_db), current_user = Depends(oauth2.get_current_user)):
     
     # retrieving the post with the specific id requested by the user 
@@ -91,8 +90,6 @@ def get_post(id: int, db : Session = Depends(get_db), current_user = Depends(oau
                             detail= f"Not authorized to perform this action")
     
     
-        
-        
     return retrieved_post
     
     
@@ -128,9 +125,10 @@ def delete_post(id: int, db : Session = Depends(get_db), current_user = Depends(
         
     
 
-# Updating an item's title only 
+# Updating an item
 @router.put("/{id}", response_model = schemas.PostResponse)
-def update_post(id: int, post: schemas.PostUpdate, db : Session = Depends(get_db), current_user = Depends(oauth2.get_current_user)):
+def update_post(id: int, post: schemas.PostUpdate, db : Session = Depends(get_db), 
+                current_user = Depends(oauth2.get_current_user)):
     
     # cursor.execute("""UPDATE posts SET title = %s, content = %s, published = %s WHERE id = %s RETURNING * """,
     #                (post.title,post.content,post.published,id))

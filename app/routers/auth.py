@@ -1,6 +1,6 @@
-from fastapi import APIRouter, HTTPException, status, Depends
+from fastapi import APIRouter,HTTPException,status,Depends
 from sqlalchemy.orm import Session
-from .. import schemas,database,utils, models, oauth2
+from .. import schemas,database,utils,models,oauth2
 
 router =  APIRouter(
     tags= ["Auth"]
@@ -18,6 +18,7 @@ def login(user_credentials: schemas.LoginCreate, db: Session = Depends(database.
         raise HTTPException(status_code= status.HTTP_403_FORBIDDEN,
                             detail= f"Invalid Credentials")
     
+    # Create token after validating credentials
     # We decided to put user_id into payload
     token = oauth2.create_token({"user_id": user.id})
     

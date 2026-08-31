@@ -1,6 +1,4 @@
 from jose import jwt, JWTError
-import os
-from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
@@ -19,8 +17,6 @@ and hands it to you as token.'''
 which endpoint or path clients should hit to obtain a token in the first place,
 so the interactive Swagger UI can show a proper "Authorize" login form.'''
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl= "login")
-
-
 
 
 '''The backend creates a token (after verifying login credentials), 
@@ -76,6 +72,7 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
                                            headers= {"WWW-Authenticate": "Bearer"})
     id = verify_token(token, credentials_exception)
     
+    # Retrieve the user's details using their id 
     user_data = db.query(models.User).filter(models.User.id == id).first()
     
     if user_data is None:

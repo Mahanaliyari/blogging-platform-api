@@ -10,5 +10,6 @@ def hash(password: str):
 
 # Function to compare and verify passwords 
 # Returns True if both hashed passwords are the same, otherwise False
+
 def verify(plain_pass, hashed_pass): 
     return pwd_context.verify(plain_pass,hashed_pass)

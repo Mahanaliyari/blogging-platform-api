@@ -4,8 +4,6 @@ from ..database import  get_db
 from .. import schemas,models,utils
 
 
-
-
 '''Instead of writing "/users" in the path of every route
 we define prefix in APIRouter and write "/users"
 since this stays constant in our path.
@@ -16,6 +14,8 @@ router = APIRouter(
     prefix = "/users",
     tags= ["Users"]
 )
+
+
 #--------------------               
 # User registration
 #--------------------
@@ -23,8 +23,8 @@ router = APIRouter(
 def create_user(user: schemas.UserCreate,db : Session = Depends(get_db)): 
 
         # Hashing user's password
-        hashed_password = utils.hash(user.password)
-        user.password = hashed_password     
+        user.password = utils.hash(user.password)  
+          
         new_user = models.User(**user.model_dump())
         db.add(new_user)
         db.commit()
@@ -36,6 +36,7 @@ def create_user(user: schemas.UserCreate,db : Session = Depends(get_db)):
     
 @router.get("/{id}", response_model = schemas.UserResponse)
 def get_user_info(id: int, db: Session = Depends(get_db)): 
+    
     retrieved_user = db.query(models.User).filter(models.User.id == id).first()
     if not retrieved_user: 
         raise HTTPException(status_code= status.HTTP_404_NOT_FOUND,

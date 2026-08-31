@@ -6,8 +6,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# This pydantic class verifies the env variables from .env
-# We will call the variables from this class later in our program 
+''' Settings defines the application's configuration schema. 
+BaseSettings obtains values from supported settings sources—including 
+environment variables and the configured .env file and 
+Pydantic parses/validates those values against the declared types.
+We will call the variables from this class later in our program '''
+
 class Settings(BaseSettings):
      
     secret_key: str
@@ -24,3 +28,9 @@ class Settings(BaseSettings):
         
 
 setting = Settings() # type: ignore
+
+
+
+'''.env stores configuration → Settings defines what configuration is expected → 
+Settings() loads and validates it → 
+setting gives the rest of your application convenient access to it.'''
