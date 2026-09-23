@@ -50,7 +50,7 @@ def create_post(post: schemas.PostCreate,db : Session = Depends(get_db), current
 
 
 @router.get("/" ,response_model= list[schemas.GetLikes])
-def get_posts(db : Session = Depends(get_db), current_user = Depends(oauth2.get_current_user),
+def get_posts(db : Session = Depends(get_db),
               limit : int = 10, skip: int = 0, search: str = ""):
     #cursor.execute(""" SELECT * FROM posts""")
     #posts = cursor.fetchall()
@@ -64,7 +64,7 @@ def get_posts(db : Session = Depends(get_db), current_user = Depends(oauth2.get_
         models.Post.title.contains(search)).limit(limit).offset(skip).all()
         
 
-    return  total_likes
+    return total_likes
    
     
    

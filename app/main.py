@@ -33,7 +33,7 @@ app.include_router(likes.router)
 
 @app.get("/")
 def root():
-    return{'Hello World'}
+    return{'message':'Hello World'}
         
     
     
