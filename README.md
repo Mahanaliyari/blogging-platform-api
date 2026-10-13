@@ -96,9 +96,9 @@ docker compose exec api alembic upgrade head
 
 The API should then be available at:
 
-- **API base URL:** http://localhost:8000
-- **Swagger UI:** http://localhost:8000/docs
-- **ReDoc:** http://localhost:8000/redoc
+- **API Base URL:** [https://141.147.118.245](https://141.147.118.245)
+- **Swagger UI:** [Interactive API documentation](https://141.147.118.245/docs)
+- **ReDoc:** [API reference documentation](https://141.147.118.245/redoc)
 
 To stop the containers, run:
 
@@ -138,14 +138,6 @@ To also remove the PostgreSQL data volume, run `docker compose down -v`. This pe
    uvicorn app.main:app --reload
    ```
 
-## API Documentation
-
-FastAPI generates interactive API documentation from the application's routes and schemas. Once the server is running, use:
-
-- **Swagger UI:** http://localhost:8000/docs
-- **ReDoc:** http://localhost:8000/redoc
-
-Use the documentation to inspect available endpoints, request parameters, schemas, and response formats.
 
 ## Database Migrations
 
